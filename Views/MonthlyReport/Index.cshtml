@@ -1,0 +1,197 @@
+﻿@{ Layout = ""; }
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="theme-color" content="#111152" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Mounthly report</title>
+    <link rel="shortcut icon" type="image/png" href="~/favicon.ico" />
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/MainStyle.css" />
+    <script src="~/js/jquery-3.5.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/chart.js"></script>
+    <script src="~/js/chartjs-plugin-datalabels.js"></script>
+    <script src="~/js/Chart.roundedBarCharts.min.js"></script>
+    <script src="~/js/chartjs-annotation.min.js"></script>
+    <script src="~/js/chartjs-doughnutlabel.js"></script>
+    <script src="~/js/kirBarChartScript.js"></script>
+</head>
+@if (ViewBag.Error == "none")
+{
+    <body>
+        <div class="container-fluid h-full d-flex align-items-stretch flex-column">
+            <div class="row h-2row-quarter">
+                <div class="col-lg-3 col-xl-3 p-1 h-100">
+                    <div class="card text-center t-card">
+                        <div id="RFMonthQtyName" class="card-header"></div>
+                        <div class="card-body p-1">
+                            <p id="RFMonthQty" class="value"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xl-6 p-1 h-100">
+                    <div class="card text-center hp-card">
+                        <div id="RFChartName" class="card-header"></div>
+                        <div class="card-body p-1">
+                            <canvas id="RFChart_en" style="margin: auto"></canvas>
+                            <canvas id="RFChart_ru" style="margin: auto"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-xl-3 p-1 h-100">
+                    <div class="card text-center pr-card">
+                        <div id="RFProductionName" class="card-header"></div>
+                        <div class="card-body px-1 pt-1 pb-0 d-flex">
+                            <div class="val-box m-1 w-100">
+                                <p id="RFShift1Name" class="title"></p>
+                                <p id="RFShift1" class="value"></p>
+                            </div>
+                            <div class="val-box m-1 w-100">
+                                <p id="RFShift2Name" class="title"></p>
+                                <p id="RFShift2" class="value"></p>
+                            </div>
+
+                        </div>
+                        <div class="card-body px-1 pb-1 pt-0 d-flex">
+                            <div class="val-box m-1 w-100">
+                                <p id="RFShift3Name" class="title"></p>
+                                <p id="RFShift3" class="value"></p>
+                            </div>
+                            <div class="val-box m-1 w-100">
+                                <p id="RFDayName" class="title"></p>
+                                <p id="RFDay" class="value"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row h-2row-quarter">
+                <div class="col-xs-3 col-xl-3 p-1 h-100">
+                    <div class="card text-center t-card">
+                        <div id="WMMonthQtyName" class="card-header"></div>
+                        <div class="card-body p-1">
+                            <p id="WMMonthQty" class="value"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-xl-6 p-1 h-100">
+                    <div class="card text-center hp-card">
+                        <div id="WMChartName" class="card-header"></div>
+                        <div class="card-body p-1">
+                            <canvas id="WMChart_en" style="margin: auto"></canvas>
+                            <canvas id="WMChart_ru" style="margin: auto"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-xl-3 p-1 h-100">
+                    <div class="card text-center pr-card">
+                        <div id="WMProductionName" class="card-header"></div>
+                        <div class="card-body px-1 pt-1 pb-0 d-flex">
+                            <div class="val-box m-1 w-100">
+                                <p id="WMShift1Name" class="title"></p>
+                                <p id="WMShift1" class="value"></p>
+                            </div>
+                            <div class="val-box m-1 w-100">
+                                <p id="WMShift2Name" class="title"></p>
+                                <p id="WMShift2" class="value"></p>
+                            </div>
+                        </div>
+                        <div class="card-body px-1 pb-1 pt-0 d-flex">
+                            <div class="val-box m-1 w-100">
+                                <p id="WMShift3Name" class="title"></p>
+                                <p id="WMShift3" class="value"></p>
+                            </div>
+                            <div class="val-box m-1 w-100">
+                                <p id="WMDayName" class="title"></p>
+                                <p id="WMDay" class="value"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+        setInterval(() => $.ajax({
+            url: "@Url.Action("ChangeLang")",
+            type: "GET",
+            success: (response) => {
+                $("#WMMonthQtyName").text(response.wmMonthQtyName);
+                $("#WMChartName").text(response.chartName);
+                $("#WMProductionName").text(response.productionName);
+                $("#WMShift1Name").text(response.shift1Name);
+                $("#WMShift2Name").text(response.shift2Name);
+                $("#WMShift3Name").text(response.shift3Name);
+                $("#WMDayName").text(response.dayName);
+
+                $("#RFMonthQtyName").text(response.rfMonthQtyName);
+                $("#RFChartName").text(response.chartName);
+                $("#RFProductionName").text(response.productionName);
+                $("#RFShift1Name").text(response.shift1Name);
+                $("#RFShift2Name").text(response.shift2Name);
+                $("#RFShift3Name").text(response.shift3Name);
+                $("#RFDayName").text(response.dayName);
+
+                if (response.en) {
+                    $('#RFChart_en').show();
+                    $('#RFChart_ru').hide();
+                    $('#WMChart_en').show();
+                    $('#WMChart_ru').hide();
+                }
+                else {
+                    $('#RFChart_en').hide();
+                    $('#RFChart_ru').show();
+                    $('#WMChart_en').hide();
+                    $('#WMChart_ru').show();
+                }
+            }
+        }), 3000);
+        </script>
+        <script>
+        let RFchart_en = Render($("#RFChart_en"),  @Json.Serialize(ViewBag.Labels_en), 30);
+        let RFchart_ru = Render($("#RFChart_ru"),  @Json.Serialize(ViewBag.Labels_ru), 30);
+        let WMchart_en = Render($("#WMChart_en"),  @Json.Serialize(ViewBag.Labels_en), 30);
+        let WMchart_ru = Render($("#WMChart_ru"),  @Json.Serialize(ViewBag.Labels_ru), 30);
+        setInterval(() => $.ajax({
+            url: "@Url.Action("Update")",
+            type: "GET",
+            success: (response) => {
+                FillData(response.rfproduction, RFchart_en, $("#RFMonthQty"));
+                FillData(response.rfproduction, RFchart_ru, $("#RFMonthQty"));
+                FillData(response.wmproduction, WMchart_en, $("#WMMonthQty"));
+                FillData(response.wmproduction, WMchart_ru, $("#WMMonthQty"));
+
+                let numSeparate = (str) => String(str).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+
+                $("#RFShift1").text(numSeparate(response.rf1shift));
+                $("#RFShift2").text(numSeparate(response.rf2shift));
+                $("#RFShift3").text(numSeparate(response.rf3shift));
+                $("#RFDay").text(numSeparate(response.rfday));
+
+                $("#WMShift1").text(numSeparate(response.wm1shift));
+                $("#WMShift2").text(numSeparate(response.wm2shift));
+                $("#WMShift3").text(numSeparate(response.wm3shift));
+                $("#WMDay").text(numSeparate(response.wmday));
+            }
+        }), 1000);
+        </script>
+        <script>
+        setInterval(() => $.ajax({
+            url: "@Url.Action("Refresh")",
+            type: "GET",
+            success: (response) => { if (response) document.location.reload(); }
+        }), 2000);
+        </script>
+    </body>
+}
+else
+{
+    <body>
+        <img src="~/img/load.gif" style="margin:auto;height:100%;display:block;margin-left:auto;margin-right:auto;" />
+        <script>
+            setInterval(() => document.location.reload(), 3000);
+        </script>
+    </body>
+}
+</html>

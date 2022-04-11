@@ -1,0 +1,1078 @@
+@font-face{
+    font-family: "Ubuntu";
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+    src: url("../Fonts/Ubuntu.ttf");
+}
+
+body {
+    font-family: Ubuntu;
+    font-weight: bold;
+    color: #fff;
+    background-color: #111152;
+    margin: 0.5rem;
+    overflow-x: hidden;
+}
+
+.first-row {
+    /*margin-top: calc(100%/31);*/
+}
+
+a {
+    color: #03f;
+}
+
+    a:hover {
+        color: #69f;
+    }
+
+    a:link {
+        -webkit-tap-highlight-color: #fcd700;
+    }
+
+ul {
+    list-style-type: none;
+}
+
+/* Custom text-selection colors */
+::-moz-selection {
+    background: #fcd700;
+    color: #fff;
+    text-shadow: none;
+}
+
+::selection {
+    background: #fcd700;
+    color: #fff;
+    text-shadow: none;
+}
+
+ins {
+    background-color: #fcd700;
+    color: #000;
+    text-decoration: none;
+}
+
+mark {
+    background-color: #fcd700;
+    color: #000;
+    font-style: italic;
+    font-weight: bold;
+}
+
+/* Mozilla dosen't style placeholders by default */
+input:-moz-placeholder, textarea:-moz-placeholder {
+    color: #a9a9a9;
+}
+
+/* let's give blockquotes *some* default styling */
+blockquote {
+    padding: 16px;
+    background: #eee;
+}
+
+.preload {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    display: -webkit-flex;
+}
+
+    .preload h1 {
+        margin: auto;
+        font-size: 7vw;
+        color: #111152;
+    }
+
+        .preload h1 .letter {
+            opacity: 0;
+            display: inline-block;
+            line-height: 1em;
+            color: white;
+        }
+
+@-webkit-keyframes hue {
+    0% {
+        -webkit-filter: hue-rotate(360deg);
+    }
+
+    50% {
+        -webkit-filter: hue-rotate(240deg);
+    }
+
+    100% {
+        -webkit-filter: hue-rotate(360deg);
+    }
+}
+
+@-moz-keyframes hue {
+    0% {
+        -webkit-filter: hue-rotate(360deg);
+    }
+
+    50% {
+        -webkit-filter: hue-rotate(240deg);
+    }
+
+    100% {
+        -webkit-filter: hue-rotate(360deg);
+    }
+}
+
+@-ms-keyframes hue {
+    0% {
+        -webkit-filter: hue-rotate(360deg);
+    }
+
+    50% {
+        -webkit-filter: hue-rotate(240deg);
+    }
+
+    100% {
+        -webkit-filter: hue-rotate(360deg);
+    }
+}
+
+@keyframes hue {
+    0% {
+        -webkit-filter: hue-rotate(360deg);
+    }
+
+    50% {
+        -webkit-filter: hue-rotate(240deg);
+    }
+
+    100% {
+        -webkit-filter: hue-rotate(360deg);
+    }
+}
+
+.h-full {
+    height: calc(100vh - 1rem);
+}
+
+.h-1row-quarter {
+    height: calc(100%);
+}
+
+.h-row-quarter {
+    height: calc(100% / 3);
+}
+
+.h-2row-quarter {
+    height: calc(100% / 2);
+}
+
+.h-row-2quarter {
+    height: calc((100% / 3) * 2);
+}
+
+.h-card-half {
+    height: calc(50% - 0.25rem);
+}
+
+.card {
+    position: relative;
+    height: 100%;
+    background-color: midnightblue;
+    border: none;
+    border-radius: 0.75rem;
+}
+
+    .card.h-card-half {
+        height: calc(50% - 0.25rem);
+    }
+
+    .card .card-header {
+        background-color: rgba(0, 0, 0, 0.1);
+        font-size: 2vw;
+        padding: 0.25rem;
+        padding-bottom: 2px;
+        color: #fff;
+    }
+
+        .card .card-header:first-child {
+            border-radius: calc(.75rem - 1px) calc(.75rem - 1px) 0 0;
+        }
+
+    .card .card-body {
+        position: relative;
+        height: 100%;
+    }
+
+.card-group {
+    height: 100%;
+}
+
+.dv .toggle.btn {
+    display: block;
+    margin: auto;
+}
+
+.t-card {
+    /*    background: -webkit-linear-gradient(45deg, #30bd5b 0%, #E06D02 50%, #A102E0 100%);*/
+    /*    background: -webkit-linear-gradient(45deg, #30bd5b 0%, #E06D02 50%, #C779D0 100%);*/
+    background: -webkit-linear-gradient(45deg, #FFE985 5%, #7feb91 50%, #d982f3 95%);
+    background-size: 500% 500%;
+    -webkit-animation: TodayGradient 15s ease infinite;
+    -moz-animation: TodayGradient 15s ease infinite;
+    -o-animation: TodayGradient 15s ease infinite;
+    animation: TodayGradient 15s ease infinite;
+    color: #15155e;
+}
+
+    .t-card .value {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        font-size: 5.9vw;
+        padding-top: 2.5%;
+    }
+
+.placeholder {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: none;
+    /*.blur {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(0.35vw);
+        z-index: 99;
+        border-radius: 0.8rem;
+    }*/
+}
+
+    .placeholder .theImg1 {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        background: url(../img/FShift.jpg) no-repeat;
+        background-size: contain;
+        background-position: center center;
+    }
+
+    .placeholder .theImg2 {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        background: url(../img/SShift.jpg) no-repeat;
+        background-size: contain;
+        background-position: center center;
+    }
+
+    .placeholder .theImg3 {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        background: url(../img/TShift.jpg) no-repeat;
+        background-size: contain;
+        background-position: center center;
+    }
+
+@-webkit-keyframes TodayGradient {
+    0% {
+        background-position: 0% 92%;
+    }
+
+    50% {
+        background-position: 100% 9%;
+    }
+
+    100% {
+        background-position: 0% 92%;
+    }
+}
+
+@-moz-keyframes TodayGradient {
+    0% {
+        background-position: 0% 92%;
+    }
+
+    50% {
+        background-position: 100% 9%;
+    }
+
+    100% {
+        background-position: 0% 92%;
+    }
+}
+
+@-ms-keyframes TodayGradient {
+    0% {
+        background-position: 0% 92%;
+    }
+
+    50% {
+        background-position: 100% 9%;
+    }
+
+    100% {
+        background-position: 0% 92%;
+    }
+}
+
+@keyframes TodayGradient {
+    0% {
+        background-position: 0% 92%;
+    }
+
+    50% {
+        background-position: 100% 9%;
+    }
+
+    100% {
+        background-position: 0% 92%;
+    }
+}
+
+.val-box {
+    position: relative;
+    background-color: #15155e;
+    border-radius: 0.5rem;
+}
+
+    .val-box .title {
+        position: absolute;
+        top: 0.3rem;
+        left: 0.6rem;
+        font-size: 2vw;
+    }
+
+    .val-box .value {
+        height: 100%;
+        margin: 0;
+        padding-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        font-size: 3vw;
+        line-height: 1;
+    }
+
+.pc-card .left-content, .pc-card .right-content {
+    position: relative;
+}
+
+.pc-card .prBarTitle {
+    font-size: 0.8vw;
+    margin: 0;
+    text-align: center;
+    line-height: 1.2vw;
+}
+
+    .pc-card .prBarTitle .count {
+        position: absolute;
+        right: 10px;
+    }
+
+    .pc-card .prBarTitle:nth-child(3) {
+        padding-top: 5px;
+    }
+
+.pc-card .progress {
+    height: 100%;
+    border-radius: 15px !important;
+    background-color: #15155e;
+}
+
+    .pc-card .progress .progress-bar {
+        background-color: white;
+        border-radius: 15px;
+    }
+
+.apo-card .val-box .value {
+    font-size: 3vw;
+    padding-top: 0.5%;
+}
+
+.apo-card .prBarTitle {
+    position: relative;
+    font-size: 0.8vw;
+    margin: 0;
+    text-align: left;
+    line-height: 1.2vw;
+    padding-left: 10px;
+}
+
+    .apo-card .prBarTitle .count {
+        position: absolute;
+        text-align: center;
+        left: 0;
+        right: 0;
+    }
+
+    .apo-card .prBarTitle .qty {
+        position: absolute;
+        text-align: right;
+        left: 0;
+        right: 0;
+        padding-right: 10px;
+    }
+
+    .apo-card .prBarTitle:nth-child(odd) {
+        padding-top: 5px;
+    }
+
+    .apo-card .prBarTitle:first-child {
+        padding-top: 0;
+    }
+
+.apo-card .progress {
+    height: 100%;
+    border-radius: 15px !important;
+    background-color: #15155e;
+}
+
+    .apo-card .progress .progress-bar {
+        background-color: white;
+        border-radius: 15px;
+    }
+
+.flex-prod-models {
+    -ms-flex-direction: row !important;
+    flex-direction: row !important
+}
+
+#dailyForm .sr-card .val-box .value {
+    font-size: 3vw;
+}
+
+.new-rec {
+    background-color: orange;
+    border-radius: .5rem;
+    color: midnightblue;
+}
+
+    .new-rec::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: .5rem;
+        -webkit-box-shadow: 0 0 25px -5px #ffa11e;
+        -moz-box-shadow: 0 0 25px -5px #ffa11e;
+        box-shadow: 0 0 25px -5px #ffa11e;
+        -webkit-animation: Record 4s ease infinite;
+        -moz-animation: Record 4s ease infinite;
+        -o-animation: Record 4s ease infinite;
+        animation: Record 4s ease infinite;
+    }
+
+    .new-rec::before {
+        content: "NEW RECORD";
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        font-size: 0.8vw;
+        background-color: rgba(255, 255, 255, 0.3);
+        padding-top: 3px;
+        border-bottom-left-radius: .5rem;
+        border-bottom-right-radius: .5rem;
+        z-index: 999;
+    }
+
+.attention {
+    background-color: #d01616;
+    border-radius: .5rem;
+}
+
+    .attention::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: .5rem;
+        -webkit-box-shadow: 0 0 25px -5px #ff2929;
+        -moz-box-shadow: 0 0 25px -5px #ff2929;
+        box-shadow: 0 0 25px -5px #ff2929;
+        -webkit-animation: Record 4s ease infinite;
+        -moz-animation: Record 4s ease infinite;
+        -o-animation: Record 4s ease infinite;
+        animation: Record 4s ease infinite;
+    }
+
+@-webkit-keyframes Record {
+    0% {
+        opacity: 0%;
+    }
+
+    50% {
+        opacity: 100%;
+    }
+
+    100% {
+        opacity: 0%;
+    }
+}
+
+@-moz-keyframes Record {
+    0% {
+        opacity: 0%;
+    }
+
+    50% {
+        opacity: 100%;
+    }
+
+    100% {
+        opacity: 0%;
+    }
+}
+
+@-ms-keyframes Record {
+    0% {
+        opacity: 0%;
+    }
+
+    50% {
+        opacity: 100%;
+    }
+
+    100% {
+        opacity: 0%;
+    }
+}
+
+@keyframes Record {
+    0% {
+        opacity: 0%;
+    }
+
+    50% {
+        opacity: 100%;
+    }
+
+    100% {
+        opacity: 0%;
+    }
+}
+
+.tw-card {
+    background-image: -webkit-linear-gradient(45deg, #eefeb7 19.1%, #a9fede 53.9%, #5adeff 92%);
+    background-size: 500% 500%;
+    -webkit-animation: TodayGradient 12s ease infinite;
+    -moz-animation: TodayGradient 12s ease infinite;
+    -o-animation: TodayGradient 12s ease infinite;
+    animation: TodayGradient 12s ease infinite;
+    color: #15155e;
+}
+
+    .tw-card .value {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        font-size: 6.2vw;
+        padding-top: 1%;
+    }
+
+.tw-card-pd {
+    background-color: midnightblue;
+    color: #fff;
+}
+
+    .tw-card-pd .value {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        font-size: 6.2vw;
+        padding-top: 1%;
+    }
+
+.tff-card ul.faults-list {
+    height: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+    .tff-card ul.faults-list li {
+        background-color: #15155e;
+        height: 100%;
+        border-radius: 15px;
+        padding-left: 2.5%;
+        padding-right: 2.5%;
+        text-transform: uppercase;
+        display: flex;
+        display: -webkit-flex;
+    }
+
+        .tff-card ul.faults-list li p.fault {
+            font-size: 0.8vw;
+            margin: auto;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+            .tff-card ul.faults-list li p.fault .letter {
+                display: inline-block;
+                text-overflow: ellipsis;
+            }
+
+.whu-card .prBarTitle {
+    position: relative;
+    font-size: 1.1vw;
+    margin: 0;
+    text-align: left;
+    padding-left: 10px;
+    line-height: 1.2;
+    padding-bottom: 0.5%;
+}
+
+    .whu-card .prBarTitle .percentage {
+        position: absolute;
+        text-align: right;
+        left: 0;
+        right: 0;
+        padding-right: 10px;
+    }
+
+    .whu-card .prBarTitle:nth-child(odd) {
+        padding-top: 3%;
+    }
+
+    .whu-card .prBarTitle:first-child {
+        padding-top: 0;
+    }
+
+.whu-card .progress {
+    height: 100%;
+    border-radius: 2vw !important;
+    background-color: #15155e;
+    padding: 2%;
+}
+
+    .whu-card .progress .progress-bar {
+        background-color: white;
+        border-radius: 15px;
+    }
+
+.ihp-card .val-box {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+    .ihp-card .val-box .title {
+        font-size: 2vw;
+    }
+
+    .ihp-card .val-box .value {
+        font-size: 3vw;
+        padding-top: 2%;
+        line-height: 1;
+    }
+
+#weeklyPDForm .whu-card .progress {
+    padding: 4%;
+}
+
+.tm-card {
+    background-image: -webkit-linear-gradient(45deg, #FBDA61 0%, #2AF598 100%);
+    background-size: 600% 400%;
+    -webkit-animation: TodayGradient 12s ease infinite;
+    -moz-animation: TodayGradient 12s ease infinite;
+    -o-animation: TodayGradient 12s ease infinite;
+    animation: TodayGradient 12s ease infinite;
+    color: #15155e;
+}
+
+    .tm-card .value {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        font-size: 6.2vw;
+        padding-top: 1%;
+    }
+
+.ih-card ul.ih-list {
+    height: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+    .ih-card ul.ih-list li {
+        position: relative;
+        background-color: #15155e;
+        height: 100%;
+        border-radius: 15px;
+        text-align: right;
+        padding-right: 6%;
+        display: flex;
+        display: -webkit-flex;
+    }
+
+        .ih-card ul.ih-list li span.title {
+            position: absolute;
+            top: 0.3rem;
+            left: 0.6rem;
+            font-size: 0.8vw;
+        }
+
+        .ih-card ul.ih-list li span.value {
+            font-size: 1.5vw;
+            line-height: 1;
+            padding-top: 2px;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+.ex-card .val-box {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+    .ex-card .val-box .title {
+        font-size: 2vw;
+    }
+
+    .ex-card .val-box .value {
+        font-size: 3vw;
+        padding-top: 2%;
+        line-height: 1;
+    }
+
+.wh-card p.value {
+    font-size: 2.5vw;
+    height: 100%;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.ty-card {
+    background: -webkit-linear-gradient(45deg, #ffdcb1 1.9%, #f6d2ff 39.3%, #98defe 64.7%, #fbffd2 100.8%);
+    /*    background: -webkit-linear-gradient(45deg, rgba(255,187,187,1) -8.8%, rgba(255,220,177,1) 12.4%, rgba(255,249,177,1) 35.6%, rgba(220,255,177,1) 59.6%, rgba(177,218,255,1) 84%, rgba(222,177,255,1) 107.9% );*/
+    /*    background: -webkit-linear-gradient(45deg, rgba(252,85,85,1) 1.7%, rgba(249,194,132,1) 19%, rgba(205,251,150,1) 35.3%, rgba(246,248,155,1) 52.2%, rgba(164,251,247,1) 68.1%, rgba(183,185,252,1) 82.4%, rgba(253,176,194,0.96) 93.2% );*/
+    /*    background: -webkit-linear-gradient(45deg, #ee9ca7 0%, #bbc1bf 25%, #57c6e1 45%, #b49fda 80%, #7ac5d8 100%);*/
+    background-size: 600% 600%;
+    -webkit-animation: TodayGradient 12s ease infinite;
+    -moz-animation: TodayGradient 12s ease infinite;
+    -o-animation: TodayGradient 12s ease infinite;
+    animation: TodayGradient 12s ease infinite;
+    color: #15155e;
+}
+
+    .ty-card .value {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        display: -webkit-flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        font-size: 5.2vw;
+    }
+
+#yearlyForm .wh-card p.value {
+    font-size: 2.3vw;
+}
+
+@media (max-width: 991px) {
+    .h-full {
+        height: auto !important;
+        overflow-x: hidden;
+    }
+
+    .h-50 {
+        height: auto !important;
+    }
+
+    .h-row-quarter {
+        min-height: 300px;
+        height: auto;
+    }
+
+    .card {
+        height: 250px;
+    }
+
+    .total-factories {
+        height: 30px;
+    }
+
+    .card.h-card-half {
+        height: 150px;
+    }
+
+    .dp-card, .mp-card, .ex-card {
+        height: 400px;
+    }
+
+    .val-box .title {
+        left: 0.8rem;
+        font-size: 2vw;
+    }
+
+    .val-box .value {
+        font-size: 3vw;
+    }
+
+    .t-card .value {
+        font-size: 7rem;
+    }
+
+    .ty-card .value {
+        font-size: 4.5rem;
+    }
+
+    .s-cards > .card {
+        height: 300px !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+        .s-cards > .card:last-child {
+            margin-bottom: 0 !important;
+        }
+
+    .hp-card {
+        height: 800px;
+    }
+
+    .pr-card {
+        height: 230px;
+    }
+
+    .pc-card .prBarTitle {
+        font-size: 14px;
+        line-height: 20px;
+        text-align: left;
+        padding-left: 10px;
+    }
+
+        .pc-card .prBarTitle:nth-child(3) {
+            padding-top: 15px;
+        }
+
+    .pc-card .progress {
+        height: calc((100% - (40px + 15px))/2) !important;
+    }
+
+    .apo-card {
+        height: 250px;
+    }
+
+        .apo-card .prBarTitle {
+            font-size: 14px;
+            line-height: 18px;
+        }
+
+            .apo-card .prBarTitle .count {
+                position: absolute;
+                text-align: center;
+                left: 0;
+                right: 0;
+            }
+
+            .apo-card .prBarTitle .qty {
+                position: absolute;
+                text-align: right;
+                left: 0;
+                right: 0;
+                padding-right: 10px;
+            }
+
+        .apo-card .progress {
+            height: calc((100% - ((18px * 4) + 15px))/4) !important;
+        }
+
+    .prod-models {
+        height: 570px;
+    }
+
+    .apo-card-prod-models {
+        height: 560px;
+    }
+
+    .flex-prod-models {
+        -ms-flex-direction: column !important;
+        flex-direction: column !important;
+    }
+
+    .tw-card p.value, .ex-card p.value {
+        font-size: 5rem;
+    }
+
+    .wh-card {
+        height: 200px;
+    }
+
+        .wh-card p.value {
+            font-size: 3.5rem;
+        }
+
+    #yearlyForm .ap-card, #yearlyForm .rework-card, #yearlyForm .audit-card, #yearlyForm .sr-card, #yearlyForm .wh-card {
+        height: 200px;
+    }
+
+    #yearlyForm .ih-card {
+        height: 300px;
+    }
+
+    #yearlyForm .ex-card {
+        height: 550px;
+    }
+
+        #yearlyForm .ex-card .val-box {
+            height: 80px !important;
+        }
+
+    .whu-card {
+        height: 450px;
+    }
+
+        .whu-card .prBarTitle {
+            font-size: 1rem;
+        }
+
+    #monthlyForm .tm-card .value {
+        font-size: 4.5rem;
+    }
+
+    #monthlyForm .ih-card ul.ih-list li span.title {
+        font-size: 0.8rem;
+    }
+
+    .ih-card ul.ih-list li span.value {
+        font-size: 1.1rem;
+    }
+
+    .ih-card ul.ih-list li span.title {
+        font-size: 0.6rem;
+    }
+
+    .tff-card ul.faults-list li p.fault {
+        font-size: 1rem;
+    }
+
+    .new-rec::before {
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1366px) {
+    .card-header {
+        font-size: 2vw;
+    }
+}
+
+@media (min-width: 1367px) {
+    body {
+        margin: 0.6rem;
+    }
+
+    .h-full {
+        height: calc(100vh - 1.2rem);
+    }
+
+    .h-row-full > div {
+        padding: 0.6rem !important;
+    }
+
+    .card-header {
+        font-size: 2vw;
+    }
+
+    .val-box .title {
+        left: 0.8rem;
+        font-size: 2vw;
+    }
+
+    .val-box .value {
+        font-size: 3vw;
+    }
+
+    .pc-card .prBarTitle {
+        font-size: 0.9vw;
+        line-height: 1.5vw;
+    }
+
+    .apo-card .prBarTitle {
+        font-size: 1vw;
+        line-height: 1.5vw;
+    }
+
+    .apo-card .progress {
+        height: calc((100% - ((1.5vw * 4) + 15px))/4) !important;
+    }
+
+    .whu-card .prBarTitle:nth-child(odd) {
+        padding-top: 3.5%;
+        padding-bottom: 1.2%;
+    }
+
+    .new-rec::after {
+        -webkit-box-shadow: 0px 0px 25px 0px #FFA11E;
+        -moz-box-shadow: 0px 0px 25px 0px #FFA11E;
+        box-shadow: 0px 0px 25px 0px #FFA11E;
+    }
+
+    .new-rec::before {
+        font-size: 0.9vw;
+    }
+
+    .record h1, .record h2 {
+        position: absolute;
+        font-size: 5rem;
+    }
+
+    .record #theCount {
+        font-size: 20rem;
+    }
+}
