@@ -1,0 +1,175 @@
+﻿@{ Layout = ""; }
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="theme-color" content="#111152" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Yearly report</title>
+    <link rel="shortcut icon" type="image/png" href="~/favicon.ico" />
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/MainStyle.css" />
+    <script src="~/js/jquery-3.5.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/chart.js"></script>
+    <script src="~/js/chartjs-plugin-datalabels.js"></script>
+    <script src="~/js/Chart.roundedBarCharts.min.js"></script>
+    <script src="~/js/chartjs-annotation.min.js"></script>
+    <script src="~/js/chartjs-doughnutlabel.js"></script>
+    <script src="~/js/kirBarChartScript.js"></script>
+</head>
+@if (ViewBag.Error == "none")
+{
+    <body>
+        <div class="container-fluid h-full d-flex align-items-stretch flex-column">
+            <div class="row h-2row-quarter">
+                <div class="col-lg-3 col-xl-3 p-1 h-100" hidden>
+                    <div class="card text-center t-card">
+                        <div id="RFYearQtyName" class="card-header"></div>
+                        <div class="card-body p-1">
+                            <p id="RFYearQty" class="value"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-xl-9 p-1 h-100">
+                    <div class="card text-center hp-card">
+                        <div id="RFChartName" class="card-header"></div>
+                        <div class="card-body p-1">
+                            <canvas id="RFChart_en" style="margin: auto"></canvas>
+                            <canvas id="RFChart_ru" style="margin: auto"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-xl-3 p-1 h-100">
+                    <div class="card text-center pr-card">
+                        <div id="RFProductionName" class="card-header"></div>
+                        <div class="card-body px-1 pt-1 pb-0 d-flex">
+                            <div class="val-box p-1 w-100">
+                                <p id="RFAverageName" class="title"></p>
+                                <p id="RFAverage" class="value"></p>
+                            </div>
+                        </div>
+                        <div id="RFTotalName" class="card-header"></div>
+                        <div class="card-body px-1 pt-1 pb-0 d-flex">
+                            <div class="val-box p-1 w-100">
+                                <p id="RFYearName" class="title"></p>
+                                <p id="RFYear" class="value"></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row h-2row-quarter">
+                <div class="col-xs-3 col-xl-3 p-1 h-100" hidden>
+                    <div class="card text-center t-card">
+                        <div id="WMYearQtyName" class="card-header"></div>
+                        <div class="card-body p-1">
+                            <p id="WMYearQty" class="value"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-9 col-xl-9 p-1 h-100">
+                    <div class="card text-center hp-card">
+                        <div id="WMChartName" class="card-header"></div>
+                        <div class="card-body p-1">
+                            <canvas id="WMChart_en" style="margin: auto"></canvas>
+                            <canvas id="WMChart_ru" style="margin: auto"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3 col-xl-3 p-1 h-100">
+                    <div class="card text-center pr-card">
+                        <div id="WMProductionName" class="card-header"></div>
+                        <div class="card-body px-1 pt-1 pb-0 d-flex">
+                            <div class="val-box p-1 w-100">
+                                <p id="WMAverageName" class="title"></p>
+                                <p id="WMAverage" class="value"></p>
+                            </div>
+                        </div>
+                        <div id="WMTotalName" class="card-header"></div>
+                        <div class="card-body px-1 pt-1 pb-0 d-flex">
+                            <div class="val-box p-1 w-100">
+                                <p id="WMYearName" class="title"></p>
+                                <p id="WMYear" class="value"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+        setInterval(() => $.ajax({
+            url: "@Url.Action("ChangeLang")",
+            type: "GET",
+            success: (response) => {
+                $("#WMYearQtyName").text(response.wmYearQtyName);
+                $("#WMChartName").text(response.wmchartName);
+                $("#WMProductionName").text(response.productionName);
+                $("#WMAverageName").text(response.averageName);
+                $("#WMTotalName").text(response.totalName);
+                $("#WMYearName").text(response.yearName);
+
+                $("#RFYearQtyName").text(response.rfYearQtyName);
+                $("#RFChartName").text(response.rfchartName);
+                $("#RFProductionName").text(response.productionName);
+                $("#RFAverageName").text(response.averageName);
+                $("#RFTotalName").text(response.totalName);
+                $("#RFYearName").text(response.yearName);
+
+                if (response.en) {
+                    $('#RFChart_en').show();
+                    $('#RFChart_ru').hide();
+                    $('#WMChart_en').show();
+                    $('#WMChart_ru').hide();
+                }
+                else {
+                    $('#RFChart_en').hide();
+                    $('#RFChart_ru').show();
+                    $('#WMChart_en').hide();
+                    $('#WMChart_ru').show();
+                }
+            }
+        }), 3000);
+        </script>
+        <script>
+        let RFchart_en = Render($("#RFChart_en"), @Json.Serialize(ViewBag.Labels_en), 20);
+        let RFchart_ru = Render($("#RFChart_ru"), @Json.Serialize(ViewBag.Labels_ru), 20);
+        let WMchart_en = Render($("#WMChart_en"), @Json.Serialize(ViewBag.Labels_en), 20);
+        let WMchart_ru = Render($("#WMChart_ru"), @Json.Serialize(ViewBag.Labels_ru), 20);
+
+        setInterval(() => $.ajax({
+            url: "@Url.Action("Update")",
+            type: "GET",
+            success: (response) => {
+                FillData(response.rfproduction, RFchart_en, $("#RFYear"));
+                FillData(response.rfproduction, RFchart_ru, $("#RFYear"));
+                FillData(response.wmproduction, WMchart_en, $("#WMYear"));
+                FillData(response.wmproduction, WMchart_ru, $("#WMYear"));
+
+                let numSeparate = (str) => String(str).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+
+                $("#RFAverage").text(numSeparate(response.rfaverage));
+                $("#WMAverage").text(numSeparate(response.wmaverage));
+            }
+        }), 1000);
+        </script>
+        <script>
+        setInterval(() => $.ajax({
+            url: "@Url.Action("Refresh")",
+            type: "GET",
+            success: (response) => { if (response) document.location.reload(); }
+        }), 2000);
+        </script>
+    </body>
+}
+else
+{
+    <body>
+        <img src="~/img/load.gif" style="margin:auto;height:100%;display:block;margin-left:auto;margin-right:auto;" />
+        <script>
+            setInterval(() => document.location.reload(), 3000);
+        </script>
+    </body>
+}
+</html>

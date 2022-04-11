@@ -1,0 +1,135 @@
+﻿@{ Layout = ""; }
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="theme-color" content="#111152" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Daily report WM</title>
+    <link rel="shortcut icon" type="image/png" href="~/favicon.ico" />
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/MainStyle.css" />
+    <link rel="icon" href="~/img/FShift.jpg" />
+    <link rel="icon" href="~/img/SShift.jpg" />
+    <link rel="icon" href="~/img/TShift.jpg" />
+    <script src="~/js/jquery-3.5.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/chart.js"></script>
+    <script src="~/js/chartjs-plugin-datalabels.js"></script>
+    <script src="~/js/Chart.roundedBarCharts.min.js"></script>
+    <script src="~/js/chartjs-annotation.min.js"></script>
+    <script src="~/js/chartjs-doughnutlabel.js"></script>
+    <script src="~/js/kirBarShiftScript.js"></script>
+    <script src="~/js/kirBarChartScript.js"></script>
+</head>
+@switch (ViewBag.Error)
+{
+    @case "none":
+    {
+        <body>
+            <div class="container-fluid h-full d-flex align-items-stretch flex-column">
+                <div class="row h-2row-quarter">
+                    <div class="col-lg-4 col-xl-4 p-1 h-100">
+                        <div class="card text-center t-card">
+                            <div id="WMlineName" class="card-header"></div>
+                            <div class="card-body p-1">
+                                <p id="WMtotalQty" class="value"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-xl-8 p-1 h-100">
+                        <div class="card-group text-center s-cards">
+                            @for (var shiftNumber = 1; shiftNumber <= ViewBag.ShiftCount; shiftNumber++)
+                            {
+                                <div class="card">
+                                    <div class="card-header" id=@string.Concat("WMshift", shiftNumber)></div>
+                                    <div class="card-body p-2">
+                                        <div class="placeholder" id=@string.Concat("WMwait", shiftNumber)>
+                                            <div class=@string.Concat("theImg", shiftNumber)></div>
+                                        </div>
+                                        <canvas id=@string.Concat("WMchart", shiftNumber) style="margin: auto"></canvas>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="row h-2row-quarter">
+                    <div class="col-xs-12 col-xl-12 p-1 h-100">
+                        <div class="card text-center hp-card">
+                            <div id="WMhName" class="card-header"></div>
+                            <div class="card-body p-1">
+                                <canvas id="WMhp-chart" style="margin: auto"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+        setInterval(() => $.ajax({
+            url: "@Url.Action("ChangeLang")",
+            type: "GET",
+            success: (response) => {
+                $("#WMlineName").text(response.lineName);
+                $("#WMhName").text(response.hName);
+                for (var shiftNumber = 1; shiftNumber <= @ViewBag.ShiftCount; shiftNumber++)
+                    $("#WMshift" + shiftNumber).text(response.shift + " " + shiftNumber);
+            }
+        }), 3000);
+            </script>
+            <script>
+        let WMchart = Render($("#WMhp-chart"), @Json.Serialize(ViewBag.Labels), 15);
+
+        setInterval(() => $.ajax({
+            url: "@Url.Action("Update")",
+            type: "GET",
+            success: (response) => FillData(response.production, WMchart, $("#WMtotalQty"))
+        }), 1000);
+            </script>
+            <script>
+        var prod = @Json.Serialize(ViewBag.ShiftProduction);
+        var plan = @Json.Serialize(ViewBag.Plan);
+        for (var shiftNumber = 0; shiftNumber < @ViewBag.ShiftCount; shiftNumber++) {
+            var waitCtx = $("#WMwait" + (shiftNumber + 1));
+            var chart = CreateShiftBar($("#WMchart" + (shiftNumber + 1)), shiftNumber, waitCtx);
+            RenderShiftBar(chart, [prod[shiftNumber], plan[shiftNumber]], waitCtx, "@Url.Action("UpdateShift")", shiftNumber);
+        }
+            </script>
+            <script>
+        setInterval(() => $.ajax({
+            url: "@Url.Action("Refresh")",
+            type: "GET",
+            success: (response) => { if (response) document.location.reload(); }
+        }), 2000);
+            </script>
+        </body>
+        break;
+    }
+@case "plan":
+{
+    <body>
+        <div style="height: 100%; font-size: 4em; text-align: center">
+            <p style="padding-top:3em">На линии стиральных машин</p>
+            <p>не загружен план</p>
+        </div>
+        <script>
+            setInterval(() => document.location.reload(), 3000);
+        </script>
+    </body>
+    break;
+}
+@case "line":
+{
+    <body>
+        <div style="height: 100%; font-size: 4em; text-align: center">
+            <p style="padding-top:3em">На линии стиральных машин</p>
+            <p>не загружены смены</p>
+        </div>
+        <script>
+            setInterval(() => document.location.reload(), 3000);
+        </script>
+    </body>
+    break;
+}
+}
+</html>
